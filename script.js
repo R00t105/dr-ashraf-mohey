@@ -44,7 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     card.addEventListener("mouseleave", () => {
-      card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
+      card.style.transform =
+        "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
     });
   });
 
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navLinks.classList.toggle("active");
       hamburger.classList.toggle("active");
       navOverlay.classList.toggle("active");
-      
+
       // Prevent body scroll when menu is open
       if (navLinks.classList.contains("active")) {
         document.body.style.overflow = "hidden";
@@ -119,9 +120,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }, observerOptions);
 
   // Observe all sections and cards
-  document.querySelectorAll("section, .about-card, .service-card").forEach((el) => {
-    observer.observe(el);
-  });
+  document
+    .querySelectorAll("section, .about-card, .service-card")
+    .forEach((el) => {
+      observer.observe(el);
+    });
 
   // Counter Animation for Statistics
   const animateCounter = (element) => {
@@ -168,12 +171,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      
+
       // Simple form validation and submission
       const formData = new FormData(contactForm);
       const name = contactForm.querySelector('input[type="text"]').value;
       const phone = contactForm.querySelector('input[type="tel"]').value;
-      const service = contactForm.querySelector('select').value;
+      const service = contactForm.querySelector("select").value;
 
       if (name && phone && service) {
         // Here you would normally send the data to a server
@@ -185,35 +188,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Parallax Effect for Hero Section
-  window.addEventListener("scroll", () => {
-    const scrolled = window.pageYOffset;
-    const heroVisual = document.querySelector(".hero-visual");
-    if (heroVisual && scrolled < window.innerHeight) {
-      heroVisual.style.transform = `translateY(${scrolled * 0.3}px)`;
-    }
-  });
-
   // Scroll to Top Button
   const scrollToTopBtn = document.getElementById("scrollToTop");
-  
+
   if (scrollToTopBtn) {
     // Show/hide button based on scroll position (near footer)
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
       const scrollBottom = scrollTop + windowHeight;
-      
+
       // Show button when near footer (within 500px from bottom)
       const distanceFromBottom = documentHeight - scrollBottom;
-      
+
       if (distanceFromBottom < 500 && scrollTop > windowHeight) {
         scrollToTopBtn.classList.add("visible");
       } else {
         scrollToTopBtn.classList.remove("visible");
       }
-      
+
       // Hide button if scrolled back up a bit from footer
       if (distanceFromBottom > 600) {
         scrollToTopBtn.classList.remove("visible");
@@ -221,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
+
     // Initial check
     handleScroll();
 
@@ -230,40 +225,38 @@ document.addEventListener("DOMContentLoaded", () => {
       const startPosition = window.pageYOffset;
       const startTime = performance.now();
       const duration = 1500; // 1.5 seconds for ultra smooth scroll
-      
+
       // Easing function - cubic bezier for smooth acceleration and deceleration
       const easeInOutCubic = (t) => {
-        return t < 0.5 
-          ? 4 * t * t * t 
-          : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       };
-      
+
       const animateScroll = (currentTime) => {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
         const ease = easeInOutCubic(progress);
-        
+
         window.scrollTo(0, startPosition * (1 - ease));
-        
+
         if (progress < 1) {
           requestAnimationFrame(animateScroll);
         }
       };
-      
+
       requestAnimationFrame(animateScroll);
     };
 
     // Scroll to top on click with rocket animation
     scrollToTopBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      
+
       // Add launching animation
       scrollToTopBtn.classList.add("launching");
       scrollToTopBtn.classList.remove("visible");
-      
+
       // Start ultra smooth scroll immediately
       smoothScrollToTop();
-      
+
       // Remove launching class after animation completes
       setTimeout(() => {
         scrollToTopBtn.classList.remove("launching");
