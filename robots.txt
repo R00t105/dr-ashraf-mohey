@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://r00t105.github.io/dr-ashraf-mohey/
