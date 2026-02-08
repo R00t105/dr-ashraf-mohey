@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
+Allow: /index.html
+Allow: /sitemap.xml
 
-Sitemap: https://r00t105.github.io/dr-ashraf-mohey/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /temp/
+
+Crawl-delay: 1
+
+Sitemap: https://r00t105.github.io/dr-ashraf-mohey/sitemap.xml
